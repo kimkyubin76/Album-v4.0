@@ -32,6 +32,7 @@ OnScan(*) {
 
     Prog("앨범 파일 수집 중…", 0)
     aFiles := GatherAlbum(ST.AlbumPath)
+    ST.AlbumFolderOrder := GetAlbumFolderOrder(ST.AlbumPath)
     if ST.Cancel {
         ScanDone("취소됨")
         return
@@ -117,6 +118,7 @@ OnScan(*) {
     UpdateChips(totF, mc, nc)
     UpdateGrpSum(nc, mc)
 
+    ; ApplyFilter 내부에서 SortLV 호출 — 반드시 SortCol/SortAsc 설정 후 호출
     ST.SortCol := 1
     ST.SortAsc := false
     ApplyFilter("ALL")

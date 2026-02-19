@@ -50,6 +50,21 @@ GatherAlbum(root) {
     return f
 }
 
+; 앨범 폴더의 실제 순서 반환 (Loop Files 순서 = 파일시스템 순서)
+; AlbumNum과 키 형식 통일: 숫자폴더는 "01"~"99", 비숫자는 그대로
+GetAlbumFolderOrder(albumPath) {
+    order := Map()
+    idx := 0
+    Loop Files, albumPath "\*", "D" {
+        idx++
+        key := A_LoopFileName
+        if RegExMatch(key, "^\d{1,2}$") && Integer(key) >= 1 && Integer(key) <= CFG.AlbumMax
+            key := Format("{:02}", Integer(key))
+        order[key] := idx
+    }
+    return order
+}
+
 GatherFrame(rootUnused := "") {
     items   := []
     folders := ST.HasOwnProp("FrameFolders") && ST.FrameFolders.Length > 0
