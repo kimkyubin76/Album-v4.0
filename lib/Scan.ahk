@@ -119,8 +119,8 @@ OnScan(*) {
     UpdateGrpSum(nc, mc)
 
     ; ApplyFilter 내부에서 SortLV 호출 — 반드시 SortCol/SortAsc 설정 후 호출
-    ST.SortCol := 1
-    ST.SortAsc := false
+    ST.SortCol := 2
+    ST.SortAsc := true
     ApplyFilter("ALL")
     ScanDone("")
     if ST.Frames.Length > 0

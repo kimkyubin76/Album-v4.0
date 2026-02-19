@@ -120,10 +120,6 @@ ApplyFilter(m) {
     UI.FTabNF.Text  := m = "NOT"   ? "▶ ✕ NOT FOUND"  : "✕ NOT FOUND"
     UI.FTabM.Text   := m = "MATCH" ? "▶ ✓ MATCH"      : "✓ MATCH"
 
-    if m = "ALL" && ST.SortCol = 1 {
-        ST.SortAsc := false
-    }
-
     UI.LV.Opt("-Redraw")
     UI.LV.Delete()
     ST.Filtered := []
