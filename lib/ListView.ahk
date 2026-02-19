@@ -105,9 +105,6 @@ _LVCompare(idxA, idxB, col, asc) {
 _AlbumSortKey(e) {
     if e.status != "MATCH" || e.albumNum = "" || e.albumNum = "-"
         return "Z"
-    ; 실제 폴더 순서가 있으면 사용 (06, 표지, 08 등 혼합 순서 반영)
-    if ST.HasOwnProp("AlbumFolderOrder") && ST.AlbumFolderOrder.Has(e.albumNum)
-        return "A_" Format("{:04}", ST.AlbumFolderOrder[e.albumNum])
     try {
         v := Integer(e.albumNum)
         return "A_" Format("{:04}", v)
