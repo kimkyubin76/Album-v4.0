@@ -58,6 +58,7 @@ SortLV(col, asc) {
     }
     UI.LV.Opt("+Redraw")
     _SetLVColWidths()
+    _UpdateColHeaders(col, asc)
     if ST.Filtered.Length > 0
         UI.LV.Modify(1, "Select Focus Vis")
 }
@@ -155,4 +156,15 @@ UpdateGrpSum(nc, mc) {
         UI.GrpSum.Text := "  ⚠ NOT FOUND: " nc "개  |  ✓ MATCH: " mc "개"
     else
         UI.GrpSum.Text := "  ✓ 전체 MATCH: " mc "개"
+}
+
+_UpdateColHeaders(sortCol, sortAsc) {
+    static baseNames := ["상태", "앨범", "사이즈폴더", "파일명"]
+    arrow := sortAsc ? " ▲" : " ▼"
+    Loop 4 {
+        newName := baseNames[A_Index]
+        if A_Index = sortCol
+            newName .= arrow
+        UI.LV.ModifyCol(A_Index, , newName)
+    }
 }
